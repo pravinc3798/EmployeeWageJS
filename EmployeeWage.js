@@ -23,13 +23,14 @@ const HR_FullTime = 8;
 const WAGE_PerHour = 20;
 
 const WORKING_Days = 20;
-const WORKING_Hours = 160;
+const WORKING_Hours = 100;
 
 let attendanceCheck = randNumber(1) % 3;
 let attendanceStatus = '';
 let empHours = 0;
 let empDailyWage = 0;
 let empMonthlyWage = 0;
+let daysWorked = 0;
 let hoursWorked = 0;
 
 if(attendanceCheck == IS_Present)
@@ -42,11 +43,13 @@ else
 
 //console.log('Employee is :',attendanceStatus);
 
-for (let days = 0; days < WORKING_Days ; days++){
+while (daysWorked < WORKING_Days && hoursWorked < WORKING_Hours){
+    daysWorked ++;
     attendanceCheck = randNumber(1) % 3;
     empHours = getEmpHours(attendanceCheck);
+    hoursWorked += empHours;
     empDailyWage = WAGE_PerHour * empHours;
     empMonthlyWage += empDailyWage;
 }
 
-console.log("Monthly Wage : $",empMonthlyWage );
+console.log("Monthly Wage : $ %d --> (Days Worked : %d) (Hours Worked : %d)",empMonthlyWage, daysWorked, hoursWorked );
