@@ -32,6 +32,7 @@ let empDailyWage = 0;
 let empMonthlyWage = 0;
 let daysWorked = 0;
 let hoursWorked = 0;
+let dailyWages = [];
 
 if(attendanceCheck == IS_Present)
     attendanceStatus = 'Present';
@@ -44,12 +45,15 @@ else
 //console.log('Employee is :',attendanceStatus);
 
 while (daysWorked < WORKING_Days && hoursWorked < WORKING_Hours){
-    daysWorked ++;
-    attendanceCheck = randNumber(1) % 3;
-    empHours = getEmpHours(attendanceCheck);
-    hoursWorked += empHours;
+    
+    empHours = getEmpHours(randNumber(1) % 3);
     empDailyWage = WAGE_PerHour * empHours;
+    dailyWages.push(empDailyWage);
     empMonthlyWage += empDailyWage;
+
+    daysWorked ++;
+    hoursWorked += empHours;
 }
 
+console.log('Daily Wages :',dailyWages.toString());
 console.log("Monthly Wage : $ %d --> (Days Worked : %d) (Hours Worked : %d)",empMonthlyWage, daysWorked, hoursWorked );
