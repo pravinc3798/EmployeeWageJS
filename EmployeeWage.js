@@ -34,16 +34,6 @@ let daysWorked = 0;
 let hoursWorked = 0;
 let dailyWages = [];
 
-if(attendanceCheck == IS_Present)
-    attendanceStatus = 'Present';
-
-else if(attendanceCheck == IS_HalfTime)
-    attendanceStatus = 'Half Time';
-else
-    attendanceStatus = 'Absent';
-
-//console.log('Employee is :',attendanceStatus);
-
 while (daysWorked < WORKING_Days && hoursWorked < WORKING_Hours){
     
     empHours = getEmpHours(randNumber(1) % 3);
@@ -57,3 +47,58 @@ while (daysWorked < WORKING_Days && hoursWorked < WORKING_Hours){
 
 console.log('Daily Wages :',dailyWages.toString());
 console.log("Monthly Wage : $ %d --> (Days Worked : %d) (Hours Worked : %d)",empMonthlyWage, daysWorked, hoursWorked );
+
+let accumulation = 0;
+function customSum(item){
+    accumulation += item;
+    return accumulation;
+}
+
+dailyWages.forEach(customSum);
+console.log('\nA1. Monthly Wage (array.foreach) -> $',accumulation);
+
+function sumForReduction(sum,item){
+    return sum += item;
+}
+
+empMonthlyWage = dailyWages.reduce(sumForReduction)
+console.log('A2. Monthly Wage  (array.reduce) -> $',empMonthlyWage);
+
+let counter = 0;
+function mapDayToWage(item){
+    counter++;
+    return ' Day ' + counter + ' : ' + item;
+}
+
+let mappedDailyWages = dailyWages.map(mapDayToWage);
+console.log('\nB. Map Day to Wage -> \n',mappedDailyWages.toString());
+
+function filterFullDays(item){
+    return item.includes("160");
+}
+
+let filteredArray = mappedDailyWages.filter(filterFullDays);
+console.log('\nC. Days when wage is 160 -> \n',filteredArray.toString());
+
+let firstFullDayWage = mappedDailyWages.find(filterFullDays);
+console.log('\nD. First Day when wage is 160 -> \n',firstFullDayWage);
+
+function checkForFullTime (item){
+    return item.includes('160');
+}
+
+console.log('\nE. All elements of full time wage array has wage 160 ->',filteredArray.every(checkForFullTime));
+
+function checkForHalfTime (item){
+    return item.includes('80');
+}
+
+console.log('\nF. Does any elements of full time wage array has wage 80 ->',filteredArray.every(checkForHalfTime));
+
+function countDaysWorked (days,item){
+    if (item > 0)
+        days = days + 1;
+    return days;
+}
+
+console.log('\nG. Employee Working Days -> %d Days',dailyWages.reduce(countDaysWorked,0));
