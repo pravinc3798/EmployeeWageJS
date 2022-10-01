@@ -22,10 +22,15 @@ const HR_FullTime = 8;
 
 const WAGE_PerHour = 20;
 
+const WORKING_Days = 20;
+const WORKING_Hours = 160;
+
 let attendanceCheck = randNumber(1) % 3;
 let attendanceStatus = '';
 let empHours = 0;
 let empDailyWage = 0;
+let empMonthlyWage = 0;
+let hoursWorked = 0;
 
 if(attendanceCheck == IS_Present)
     attendanceStatus = 'Present';
@@ -35,9 +40,13 @@ else if(attendanceCheck == IS_HalfTime)
 else
     attendanceStatus = 'Absent';
 
-console.log('Employee is :',attendanceStatus);
+//console.log('Employee is :',attendanceStatus);
 
-empHours = getEmpHours(attendanceCheck);
-empDailyWage = WAGE_PerHour * empHours;
+for (let days = 0; days < WORKING_Days ; days++){
+    attendanceCheck = randNumber(1) % 3;
+    empHours = getEmpHours(attendanceCheck);
+    empDailyWage = WAGE_PerHour * empHours;
+    empMonthlyWage += empDailyWage;
+}
 
-console.log("Today's Wage : $",empDailyWage );
+console.log("Monthly Wage : $",empMonthlyWage );
