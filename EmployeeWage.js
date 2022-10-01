@@ -3,6 +3,17 @@ function randNumber (digits){
     return Math.floor(Math.random() * multiplier);
 }
 
+function getEmpHours(attendanceCheck){
+    switch(attendanceCheck) {
+        case IS_Present :
+            return HR_FullTime;
+        case IS_HalfTime :
+            return HR_PartTime;
+        default :
+            return 0;
+    }
+}
+
 const IS_Present = 2;
 const IS_HalfTime = 1;
 
@@ -26,15 +37,7 @@ else
 
 console.log('Employee is :',attendanceStatus);
 
-switch(attendanceCheck) {
-    case IS_Present :
-        empHours = HR_FullTime;
-        break;
-    case IS_HalfTime :
-        empHours = HR_PartTime;
-        break;
-}
-
+empHours = getEmpHours(attendanceCheck);
 empDailyWage = WAGE_PerHour * empHours;
 
 console.log("Today's Wage : $",empDailyWage );
