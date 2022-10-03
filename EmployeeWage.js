@@ -33,6 +33,7 @@ let empMonthlyWage = 0;
 let daysWorked = 0;
 let hoursWorked = 0;
 let dailyWages = [];
+let dailyWagesMap = new Map();
 
 while (daysWorked < WORKING_Days && hoursWorked < WORKING_Hours){
     
@@ -43,6 +44,8 @@ while (daysWorked < WORKING_Days && hoursWorked < WORKING_Hours){
 
     daysWorked ++;
     hoursWorked += empHours;
+
+    dailyWagesMap.set(daysWorked, empDailyWage);
 }
 
 console.log('Daily Wages :',dailyWages.toString());
@@ -102,3 +105,10 @@ function countDaysWorked (days,item){
 }
 
 console.log('\nG. Employee Working Days -> %d Days',dailyWages.reduce(countDaysWorked,0));
+
+console.log('\n UC8 : Day wise wage using map : \n')
+
+for (let [key, value] of dailyWagesMap)
+    console.log('Day %d - $ %d',key,value);
+
+console.log('\nMonthly wage from map : $',Array.from(dailyWagesMap.values()).reduce(sumForReduction,0));
