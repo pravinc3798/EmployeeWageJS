@@ -34,6 +34,7 @@ let daysWorked = 0;
 let hoursWorked = 0;
 let dailyWages = [];
 let dailyWagesMap = new Map();
+let dailyHoursMap = new Map();
 
 while (daysWorked < WORKING_Days && hoursWorked < WORKING_Hours){
     
@@ -46,6 +47,7 @@ while (daysWorked < WORKING_Days && hoursWorked < WORKING_Hours){
     hoursWorked += empHours;
 
     dailyWagesMap.set(daysWorked, empDailyWage);
+    dailyHoursMap.set(daysWorked, empHours);
 }
 
 console.log('Daily Wages :',dailyWages.toString());
@@ -106,9 +108,16 @@ function countDaysWorked (days,item){
 
 console.log('\nG. Employee Working Days -> %d Days',dailyWages.reduce(countDaysWorked,0));
 
-console.log('\n UC8 : Day wise wage using map : \n')
+console.log('\n UC 8.1 : Day wise wage using map : \n')
 
 for (let [key, value] of dailyWagesMap)
     console.log('Day %d - $ %d',key,value);
 
-console.log('\nMonthly wage from map : $',Array.from(dailyWagesMap.values()).reduce(sumForReduction,0));
+console.log('\nUC 8.2 : Monthly wage from map : $',Array.from(dailyWagesMap.values()).reduce(sumForReduction,0));
+
+console.log('\nUC 9.1 : Monthly wage from map using arrow function : $',Array.from(dailyWagesMap.values()).reduce((wage,total) => total +=wage));
+console.log('UC 9.2 : Monthly hours from map using arrow function : %d hrs.',Array.from(dailyHoursMap.values()).reduce((hours,total) => total +=hours));
+
+console.log('UC 9.3 : Full Working Days from map using arrow function : Day :',Array.from(dailyHoursMap).filter(hours => hours[1] > 4).map(days => days[0]).toString());
+console.log('UC 9.4 : Part Working Days from map using arrow function : Day :',Array.from(dailyHoursMap).filter(hours => hours[1] == 4).map(days => days[0]).toString());
+console.log('UC 9.5 : Absent Days from map using arrow function : Day :',Array.from(dailyHoursMap).filter(hours => hours[1] < 4).map(days => days[0]).toString());
