@@ -57,7 +57,7 @@ while (daysWorked < WORKING_Days && hoursWorked < WORKING_Hours){
         Wage : empDailyWage,
 
         toString() {
-            return ' "Day : ' + this.Days + ' Hrs : ' + this.Hrs + ' Wage : ' + this.Wage + '"';
+            return ' (Day : ' + this.Days + ', Hrs : ' + this.Hrs + ', Wage : ' + this.Wage + ')';
         }
     });
 }
@@ -135,3 +135,11 @@ console.log('UC 9.4 : Part Working Days from map using arrow function : Day :',A
 console.log('UC 9.5 : Absent Days from map using arrow function : Day :',Array.from(dailyHoursMap).filter(hours => hours[1] < 4).map(days => days[0]).toString());
 
 console.log('\nUC 10 : Employee Day Hour Wage Object :',empObjArray.toString());
+
+console.log('\nUC 11 A. Total Wage : %d, Total Hours : %d.',empObjArray.reduce((total,obj) => total += obj.Wage,0),empObjArray.reduce((total,obj) => total += obj.Hrs,0));
+
+console.log('\UC 11 B. Full Working Days :',empObjArray.filter(obj => obj.Hrs > 4).map(obj => obj.Days).toString());
+
+console.log('\UC 11 C. Part Working Days :',empObjArray.filter(obj => obj.Hrs == 4).map(obj => obj.Days).toString());
+
+console.log('\UC 11 D. No Working Days :',empObjArray.filter(obj => obj.Hrs < 4).map(obj => obj.Days).toString());
