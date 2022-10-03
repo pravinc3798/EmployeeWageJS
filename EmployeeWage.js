@@ -36,6 +36,8 @@ let dailyWages = [];
 let dailyWagesMap = new Map();
 let dailyHoursMap = new Map();
 
+let empObjArray = [];
+
 while (daysWorked < WORKING_Days && hoursWorked < WORKING_Hours){
     
     empHours = getEmpHours(randNumber(1) % 3);
@@ -48,6 +50,16 @@ while (daysWorked < WORKING_Days && hoursWorked < WORKING_Hours){
 
     dailyWagesMap.set(daysWorked, empDailyWage);
     dailyHoursMap.set(daysWorked, empHours);
+
+    empObjArray.push({
+        Hrs : empHours,
+        Days : daysWorked,
+        Wage : empDailyWage,
+
+        toString() {
+            return ' "Day : ' + this.Days + ' Hrs : ' + this.Hrs + ' Wage : ' + this.Wage + '"';
+        }
+    });
 }
 
 console.log('Daily Wages :',dailyWages.toString());
@@ -121,3 +133,5 @@ console.log('UC 9.2 : Monthly hours from map using arrow function : %d hrs.',Arr
 console.log('UC 9.3 : Full Working Days from map using arrow function : Day :',Array.from(dailyHoursMap).filter(hours => hours[1] > 4).map(days => days[0]).toString());
 console.log('UC 9.4 : Part Working Days from map using arrow function : Day :',Array.from(dailyHoursMap).filter(hours => hours[1] == 4).map(days => days[0]).toString());
 console.log('UC 9.5 : Absent Days from map using arrow function : Day :',Array.from(dailyHoursMap).filter(hours => hours[1] < 4).map(days => days[0]).toString());
+
+console.log('\nUC 10 : Employee Day Hour Wage Object :',empObjArray.toString());
