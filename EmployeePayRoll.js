@@ -12,7 +12,11 @@ class EmployeePayRollData{
     }
 
     set name(value){
-        this._name = value;
+        let nameRegex = RegExp('^[A-Z]{1}[a-z]{2,}$')
+        if (nameRegex.test(value))
+            this._name = value;
+        else
+            throw 'Name is not Valid';
     }
 }
 
@@ -24,3 +28,19 @@ console.log(employee);
 
 let newemployee = new EmployeePayRollData(02,'Terrisa',45000,'F',new Date().toDateString());
 console.log(newemployee);
+
+try {
+    newemployee.name = "Pr";
+    console.log(newemployee);
+} 
+catch (e) {
+    console.error(e);    
+}
+
+try {
+    employee.name = "Pravin";
+    console.log(employee);
+} 
+catch (e) {
+    console.error(e);    
+}
