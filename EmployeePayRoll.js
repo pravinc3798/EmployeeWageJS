@@ -1,8 +1,10 @@
 class EmployeePayRollData{
-    constructor (id, name, salary){
-        this.id = id,
-        this.name = name,
-        this.salary = salary
+    constructor (...params){
+        this.id = params[0],
+        this.name = params[1],
+        this.salary = params[2],
+        this.gender = params[3],
+        this.startDate = params[4]
     }
 
     get name(){
@@ -19,3 +21,6 @@ console.log(employee);
 
 employee.name = 'Mosh';
 console.log(employee);
+
+let newemployee = new EmployeePayRollData(02,'Terrisa',45000,'F',new Date().toDateString());
+console.log(newemployee);
